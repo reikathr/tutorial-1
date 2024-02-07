@@ -30,6 +30,11 @@ public class ProductRepository {
         return formerProduct;
     }
 
+    public void delete(String id) {
+        Product toBeDeleted = findByID(id);
+        productData.remove(toBeDeleted);
+    }
+
     public Iterator<Product> findAll() {
         return productData.iterator();
     }
