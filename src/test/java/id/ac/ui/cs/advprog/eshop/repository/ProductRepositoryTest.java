@@ -45,9 +45,10 @@ class ProductRepositoryTest {
         productRepository.create(product);
 
         Product editingProduct = new Product();
+        editingProduct.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
         editingProduct.setProductName("Sampo Cap Asep");
         editingProduct.setProductQuantity(150);
-        productRepository.edit("eb558e9f-1c39-460e-8860-71af6af63bd6", editingProduct);
+        productRepository.edit(editingProduct);
 
         Product editedProduct = productRepository.findByID("eb558e9f-1c39-460e-8860-71af6af63bd6");
         assertNotNull(editedProduct);
