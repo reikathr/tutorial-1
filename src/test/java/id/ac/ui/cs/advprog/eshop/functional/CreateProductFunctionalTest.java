@@ -7,6 +7,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
@@ -44,12 +46,6 @@ class CreateProductFunctionalTest {
         WebElement createButton = driver.findElement(By.linkText("Create Product"));
         createButton.click();
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
         String expectedUrl = baseUrl + "/create";
         String pageUrl = driver.getCurrentUrl();
         assertEquals(expectedUrl, pageUrl);
@@ -79,12 +75,6 @@ class CreateProductFunctionalTest {
 
         WebElement submitButton = driver.findElement(By.tagName("button"));
         submitButton.click();
-
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
 
         String expectedUrl = baseUrl + "/list";
         String pageUrl = driver.getCurrentUrl();
