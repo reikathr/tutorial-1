@@ -71,6 +71,20 @@ class ProductServiceImplTest {
     }
 
     @Test
+    void testFindByID() {
+        String productId = "eb558e9f-1c39-460e-8860-71af6af63bd6";
+        Product product = new Product();
+        product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
+        product.setProductName("Sampo Cap Bambang");
+        product.setProductQuantity(100);
+
+        when(productRepository.findByID(productId)).thenReturn(product);
+        Product productFound = productService.findByID(productId);
+        assertEquals(product, productFound);
+        verify(productRepository, times(1)).findByID(productId);
+    }
+
+    @Test
     void testEdit() {
         Product product = new Product();
         product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
@@ -89,9 +103,11 @@ class ProductServiceImplTest {
         product.setProductId("eb558e9f-1c39-460e-8860-71af6af63bd6");
         product.setProductName("Sampo Cap Bambang");
         product.setProductQuantity(100);
-        productRepository.delete(product.getProductId());
-        verify(productRepository, times(1)).delete(product.getProductId());
+        when(productRepository.delete(product.getProductId())).thenReturn(0);
+        productService.delete(product.getProductId());
+
         Product deletedProduct = productRepository.findByID("eb558e9f-1c39-460e-8860-71af6af63bd6");
         assertNull(deletedProduct);
+        verify(productRepository, times(1)).delete(product.getProductId());
     }
 }
