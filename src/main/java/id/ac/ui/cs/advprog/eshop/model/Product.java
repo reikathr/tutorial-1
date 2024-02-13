@@ -1,6 +1,5 @@
 package id.ac.ui.cs.advprog.eshop.model;
 
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.Getter;
 import lombok.Setter;
 import java.util.UUID;
