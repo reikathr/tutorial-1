@@ -44,7 +44,7 @@ class ProductServiceImplTest {
     }
 
     @Test
-    public void testFindAll() {
+    void testFindAll() {
         List<Product> productList = new ArrayList<>();
 
         Product product1 = new Product();
