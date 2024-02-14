@@ -13,7 +13,7 @@ import org.springframework.ui.Model;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-public class ProductControllerTest {
+class ProductControllerTest {
 
     @InjectMocks
     private ProductController productController;
