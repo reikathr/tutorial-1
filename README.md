@@ -2,7 +2,8 @@
 <h3>Athira Reika | 2206031422 | Pemrograman Lanjut B</h3>
 
 <a href=#tut1>Tutorial 1</a><br>
-<a href=#tut2>Tutorial 2</a>
+<a href=#tut2>Tutorial 2</a><br>
+<a href=#tut3>Tutorial 3</a>
 
 <h3 id="tut1">Tutorial 1</h3>
 
@@ -69,3 +70,36 @@ Hal tersebut berarti aplikasi yang sudah saya rilis akan diperbarui setiap
 ada update pada branch main di repositori proyek saya.</li>
 </ol>
 
+<h3 id="tut3">Tutorial 3</h3>
+<ol>
+<li>Berikut SOLID principles yang sudah saya terapkan dalam kode saya:
+<ol>
+<li> Single Responsibility Principle: Masing-masing kelas bertanggung jawab atas satu hal.
+Sebelumnya, ProductController mencakup CarController, tetapi sudah saya pisah.
+Selain itu, constructor Product juga memiliki tugas untuk meng-assign UID untuk
+objek Product yang akan dibuat, tetapi fitur itu sudah diserahkan ke method create
+di ProductRepository.</li>
+<li>Open Closed Principle: Untuk menambah fitur pada program, bisa langsung melakukan
+extend dan tidak harus memodifikasi kode lama. Contoh: CarController menggunakan interface
+CarService, bukan CarServiceImpl.</li>
+<li>Liskov Substitution Principle: CarService di CarController dapat digantikan dengan CarServiceImpl.</li>
+<li>Interface Segregation Principle: ProductServiceImpl dan CarServiceImpl tidak terpaksa mengimplementasikan
+method dari interface yang mereka implement yang tidak perlu mereka gunakan.</li>
+<li>Dependency Inversion Principle: Sebelumnya, CarController menggunakan CarServiceImpl. tetapi
+diubah agar dia menggunakan CarService (interface) yang diimplementasikan oleh CarServiceImpl.</li>
+</ol>
+</li>
+<li>Advantages: Secara umum, mengikuti SOLID principles meningkatkan maintainability
+dari suatu program. SRP memastikan bahwa setiap kelas memiliki fungsinya sendiri, sehingga
+mudah untuk membuat test case dan melakukan debugging karena apabila ada error, kita dapat tahu
+persis di mana letaknya. OCP membuat program lebih scalable karena kita dapat menambahkan fitur tanpa
+memodifikasi kode yang sudah ada (yang berpotensi untuk mengakibatkan error yang sebelumnya tidak ada). LSP
+memastikan bahwa subclass yang sudah ada memiliki sifat yang sama dengan parentnya jadi tidak ada error. ISP memastikan
+bahwa suatu kelas tidak harus mengimplementasikan method dari interfacenya yang tidak terpakai, meningkatkan readibility.
+DIP memastikan bahwa modul high-level tidak bergantung pada modul low-level, tetapi keduanya bergantung pada abstraksi seperti interface sehingga
+perubahan pada modul low-level tidak akan berpotensi merusak modul high-level. Contoh: Jika ada error di CarController, saya akan tahu di mana untuk
+melakukan debugging karena fitur-fiturnya berada di kelas sendiri, yaitu CarController itu sendiri (SRP).</li>
+<li>Disadvantages: Sebaliknya, tidak mengikuti SOLID principles menurunkan maintainability dan readibility dari sebuah kode.
+Contohnya, apabila ada interface bernama Service yang mengandung semua method yang seharusnya di CarService dan ProductService, implementasinya di CarServiceImpl
+harus mengimplementasikan method seperti <code>public Product create(Product product);</code> yang tidak digunakan.</li>
+</ol>
