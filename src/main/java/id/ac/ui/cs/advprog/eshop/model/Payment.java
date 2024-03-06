@@ -2,9 +2,11 @@ package id.ac.ui.cs.advprog.eshop.model;
 
 import lombok.Getter;
 
-import java.util.Arrays;
 import java.util.Map;
 import java.util.UUID;
+
+import id.ac.ui.cs.advprog.eshop.enums.PaymentMethod;
+import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
 
 @Getter
 public class Payment {
@@ -21,24 +23,27 @@ public class Payment {
 
     public Payment (Order order, String method, Map<String, String> paymentData, String status) {
         this(order, method, paymentData);
-        String[] statusList = {"WAITING_PAYMENT", "FAILED", "SUCCESS"};
-        if (Arrays.stream(statusList).noneMatch(item -> (item.equals(status)))) {
-            throw new IllegalArgumentException();
-        } else {
-            this.status = status;
-        }
+        this.setStatus(status);
     }
 
     public Payment(Order order, String method, Map<String, String> paymentData){
         this.id = UUID.randomUUID().toString();
         this.method = method;
         this.order = order;
-        this.status = "WAITING_PAYMENT";
+        this.status = PaymentStatus.WAITING_PAYMENT.getValue();
         this.setPaymentData(paymentData);
     }
 
+    public void setStatus (String status) {
+        if (PaymentStatus.contains(status)) {
+            this.status = status;
+        } else {
+            throw new IllegalArgumentException();
+        }
+    }
+
     private void setPaymentData (Map<String, String> paymentData){
-        if (method.equals("VOUCHER")){
+        if (method.equals(PaymentMethod.VOUCHER.getValue())){
 
             int numOfNumerics = 0;
             for (int i = 0; i < paymentData.get("voucherCode").length(); i++){
@@ -51,7 +56,7 @@ public class Payment {
                     numOfNumerics != 8) {
                 throw new IllegalArgumentException();
             }
-        } else if (method.equals("BANK")){
+        } else if (method.equals(PaymentMethod.BANK.getValue())){
             if (paymentData.get("bankName").isBlank() ||
                     paymentData.get("referenceCode").isBlank()){
                 throw new IllegalArgumentException();
