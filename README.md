@@ -3,7 +3,8 @@
 
 <a href=#tut1>Tutorial 1</a><br>
 <a href=#tut2>Tutorial 2</a><br>
-<a href=#tut3>Tutorial 3</a>
+<a href=#tut3>Tutorial 3</a><br>
+<a href=#tut4>Tutorial 4</a>
 
 <h3 id="tut1">Tutorial 1</h3>
 
@@ -102,4 +103,10 @@ melakukan debugging karena fitur-fiturnya berada di kelas sendiri, yaitu CarCont
 <li>Disadvantages: Sebaliknya, tidak mengikuti SOLID principles menurunkan maintainability dan readibility dari sebuah kode.
 Contohnya, apabila ada interface bernama Service yang mengandung semua method yang seharusnya di CarService dan ProductService, implementasinya di CarServiceImpl
 harus mengimplementasikan method seperti <code>public Product create(Product product);</code> yang tidak digunakan.</li>
+</ol>
+
+<h3 id="tut4">Tutorial 4</h3>
+<ol>
+<li>Menurut saya, TDD unik karena saya membangun program saya untuk lulus unit test yang saya buat. Dalam hal itu, saya merasa cukup terbantu karena saya tahu kasus-kasus apa yang fitur-fitur saya harus penuhi sebelum mengimplementasikan fitur-fitur tersebut. Akan tetapi, saya masih merasa kurang terbantu, mungkin karena belum terbiasa berpikir <i>test-first</i>. Pada kesempatan lain, saya ingin latihan membuat lebih banyak test agar terbiasa berpikir dengan pola seperti itu.</li>
+<li>Menurut saya, test yang sudah diimplementasikan sudah memenuhi F.I.R.S.T karena jalannya cepat, independen dengan test lain, konsisten dan menghasilkan <i>outcome</i> yang sama setiap kali dijalankan, self-validating karena ada assertion untuk pass/fail, dan thorough karena memiliki case untuk happy dan unhappy paths.</li>
 </ol>
