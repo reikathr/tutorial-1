@@ -11,8 +11,6 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class PaymentTest {
-    Map<String, String> paymentData;
-
     List<Order> orders;
 
     List<Product> products;
@@ -42,47 +40,48 @@ public class PaymentTest {
 
     @Test
     void testCreatePaymentVoucherSuccess(){
+        Map<String, String> paymentData = new HashMap<>();
         paymentData.put("voucherCode", "ESHOP1234XYZ5678");
         Payment payment1 = new Payment("bhd63cch-9b32-47bg-729c-f12dfh68fh12", orders.get(1), "VOUCHER", paymentData);
         assertSame(this.orders.get(1), payment1.getOrder());
         assertEquals(paymentData, payment1.getPaymentData());
         assertEquals("bhd63cch-9b32-47bg-729c-f12dfh68fh12", payment1.getId());
         assertEquals("VOUCHER", payment1.getMethod());
-        paymentData.clear();
     }
 
     @Test
     void testCreatePaymentVoucher16CharFail(){
+        Map<String, String> paymentData = new HashMap<>();
         paymentData.put("voucherCode", "ESHOP1234XYZ567");
         assertThrows(IllegalArgumentException.class, ()-> {new Payment("bhd63cch-9b32-47bg-729c-f12dfh68fh12", orders.get(1),
                 "VOUCHER", paymentData);
         });
-        paymentData.clear();
     }
 
     @Test
     void testCreatePaymentVoucherESHOPPrefixFail(){
+        Map<String, String> paymentData = new HashMap<>();
         paymentData.put("voucherCode", "ESHOO1234XYZ5678");
         assertThrows(IllegalArgumentException.class, ()-> {new Payment("bhd63cch-9b32-47bg-729c-f12dfh68fh12", orders.get(1),
                 "VOUCHER", paymentData);
         });
-        paymentData.clear();
     }
 
     @Test
     void testCreatePaymentVoucherFail8Numerical(){
+        Map<String, String> paymentData = new HashMap<>();
         paymentData.put("voucherCode", "ESHOP123WXYZ5678");
         assertThrows(IllegalArgumentException.class, ()-> {new Payment("bhd63cch-9b32-47bg-729c-f12dfh68fh12", orders.get(1),
                 "VOUCHER", paymentData);
         });
-        paymentData.clear();
     }
 
     @Test
     void testCreatePaymentBankSuccess(){
+        Map<String, String> paymentData = new HashMap<>();
         paymentData.put("bankName", "BNI");
         paymentData.put("referenceCode", "1234567890");
-        Payment payment1 = new Payment("bhd63cch-9b32-47bg-729c-f12dfh68fh12", orders.get(0), "BANK", paymentData);
+        Payment payment1 = new Payment("bhd63cch-9b32-47bg-729c-f12dfh68fh12", orders.get(1), "BANK", paymentData);
         assertSame(this.orders.get(1), payment1.getOrder());
         assertEquals(paymentData, payment1.getPaymentData());
         assertEquals("bhd63cch-9b32-47bg-729c-f12dfh68fh12", payment1.getId());
@@ -91,21 +90,21 @@ public class PaymentTest {
 
     @Test
     void testCreatePaymentFailBankName(){
+        Map<String, String> paymentData = new HashMap<>();
         paymentData.put("bankName", "");
         paymentData.put("referenceCode", "0");
         assertThrows(IllegalArgumentException.class, ()-> {new Payment("bhd63cch-9b32-47bg-729c-f12dfh68fh12", orders.get(1),
                 "BANK", paymentData);
         });
-        paymentData.clear();
     }
 
     @Test
     void testCreatePaymentFailReferenceCode(){
+        Map<String, String> paymentData = new HashMap<>();
         paymentData.put("bankName", "aBank");
         paymentData.put("referenceCode", "");
         assertThrows(IllegalArgumentException.class, ()-> {new Payment("bhd63cch-9b32-47bg-729c-f12dfh68fh12", orders.get(1),
                 "BANK", paymentData);
         });
-        paymentData.clear();
     }
 }
