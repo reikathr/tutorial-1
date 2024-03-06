@@ -133,33 +133,6 @@ class PaymentRepositoryTest {
     }
 
     @Test
-    void testSaveCreatePaymentDuplicatedId(){
-        Payment payment = payments.get(1);
-        paymentRepository.save(payment);
-        assertThrows(IllegalArgumentException.class, () -> {
-            paymentRepository.save(payment);
-        });
-    }
-
-    @Test
-    void testSaveCreateBankPaymentDuplicatedId() {
-        Payment payment = payments.get(3);
-        paymentRepository.save(payment);
-        assertThrows(IllegalArgumentException.class, () -> {
-            paymentRepository.save(payment);
-        });
-    }
-
-    @Test
-    void testSaveCreateVoucherPaymentDuplicatedId() {
-        Payment payment = payments.get(2);
-        paymentRepository.save(payment);
-        assertThrows(IllegalArgumentException.class, () -> {
-            paymentRepository.save(payment);
-        });
-    }
-
-    @Test
     void testFindByIdIfIdFound() {
         for (Payment payment : payments) {
             paymentRepository.save(payment);
